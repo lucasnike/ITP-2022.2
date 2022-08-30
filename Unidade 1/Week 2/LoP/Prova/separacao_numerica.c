@@ -1,24 +1,19 @@
 #include <stdio.h>
 
 int main(){
-   int n1;
+   char numeroString[6];
 
-   int numero;
-   scanf("%d", &numero);
+   scanf("%s", &numeroString);
 
-   if (numero < 9)
+   for (int i = 0; i < sizeof(numeroString); i++)
    {
-      n1 = getchar();
-      putchar("%d", n1);
-   }else if (numero < 99)
-   {
-      n1 = getchar();
-      putchar("%d\n", n1);
+      if (i == 0){
+         printf("%c", numeroString[i]);
+      }else if (numeroString[i] != NULL){
+         printf("\n%c", numeroString[i]);
+      }
 
-      n1 = getchar();
-      putchar("%d", n1);
    }
-   
 
    return 0;
 }
