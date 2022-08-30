@@ -1,33 +1,32 @@
 #include <stdio.h>
 
-// 1 2 4
-
 int main(){
 
     int numeroDeHerois, classeDoHeroi, classeDoMostro;
 
     scanf("%d %d %d", &numeroDeHerois, &classeDoHeroi, &classeDoMostro);
 
-    if (classeDoHeroi > classeDoMostro)
+    if (classeDoHeroi == 5)
     {
-        if (classeDoHeroi - classeDoMostro == 1)
+        printf("Heróis vencerão!");
+    }else if (classeDoHeroi - classeDoMostro == 1)
+    {
+        if (numeroDeHerois > 0)
         {
-            if (numeroDeHerois >= 3)
-            {
-                printf("Heróis vencerão!");
-            }else {
-                printf("Melhor chamar Saitama!");
-            }
-            
+            printf("Heróis vencerão!");
         }
         
-        printf("Heróis vencerão!");
     }else if (classeDoHeroi == classeDoMostro){
-
+        if (numeroDeHerois >= 3)
+        {
+            printf("Heróis vencerão!");
+        }else {
+            printf("Melhor chamar Saitama!");
+        }
+        
     }else { // classe do heroi menor do que a do monstro
         printf("Melhor chamar Saitama!");
     }
     
-
     return 0;
 }
