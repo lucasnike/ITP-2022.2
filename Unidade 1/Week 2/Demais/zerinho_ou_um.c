@@ -1,14 +1,14 @@
 #include <stdio.h>
-// Não funciona ainda, verificar depois
+
 int main(){
 
    int jogadaThor, jogadaStarLord, jogadaMiranha;
 
    scanf("%d %d %d", &jogadaThor, &jogadaStarLord, &jogadaMiranha);
 
-   if(jogadaThor != 0 || jogadaThor != 1 || jogadaStarLord != 0 || jogadaStarLord != 1 || jogadaMiranha != 0 || jogadaMiranha != 1)
+   if(jogadaThor != 0 && jogadaThor != 1 || jogadaStarLord != 0 && jogadaStarLord != 1 || jogadaMiranha != 0 && jogadaMiranha != 1)
    {
-      printf("Numero digitados são invalidos");
+      printf("Numero digitados sao invalidos");
    }else if(jogadaThor == jogadaMiranha && jogadaMiranha == jogadaStarLord)
    {
       printf("Empate\n");
