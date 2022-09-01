@@ -7,4 +7,6 @@ utilizando os mecanismos de entrada e saída padrão, e os operadores da linguag
 
 ## Week 2
 
-Começando com estruturas de decisões e condicionais.
+Começando com estruturas de decisões e condicionais. Aprendi a fazer um if que é igual a 
+quase todas as linguagens de programação modernas, aprendi também o switch que também é bem
+similar. Fiz todos os exercios da semana do LoP. E pretendo fazer os do Beecrowd também.
