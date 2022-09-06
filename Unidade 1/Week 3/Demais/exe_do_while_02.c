@@ -2,7 +2,8 @@
 
 int main(){
 
-   int n1, operador, n2, resultado;
+   int n1, n2, resultado;
+   char operador;
 
 
    do {
@@ -19,7 +20,11 @@ int main(){
       } else if (operador == 'x'){
          resultado = n1 * n2;
       } else if (operador == '/') {
-         resultado = n1 / n2;
+         if (n2 == 0){
+            printf("Não é possível dividir por zero");
+         } else {
+            resultado = n1 / n2;
+         }
       }
 
       printf("\n Resultado = %d\n", resultado);
