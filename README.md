@@ -10,3 +10,7 @@ utilizando os mecanismos de entrada e saída padrão, e os operadores da linguag
 Começando com estruturas de decisões e condicionais. Aprendi a fazer um if que é igual a 
 quase todas as linguagens de programação modernas, aprendi também o switch que também é bem
 similar. Fiz todos os exercios da semana do LoP. E pretendo fazer os do Beecrowd também.
+
+## Week 3
+
+Aprendi todos os laços, como: do ... while, for, while,
