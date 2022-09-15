@@ -15,7 +15,7 @@ int soma_divisores(int numero){
    int soma = 0;
    for (int i = 1; i < numero; i++)
    {
-      if (testa_divisor(numero, i) == 0)
+      if (testa_divisor(numero, i) == 1)
       {
          soma += i;
       }
@@ -25,9 +25,10 @@ int soma_divisores(int numero){
 }
 
 int testa_amigos(int a, int b){
-   int somaDeDivisores = soma_divisores(a);
+   int somaDeDivisoresA = soma_divisores(a);
+   int somaDeDivisoresB = soma_divisores(b);
 
-   if (soma_divisores == b)
+   if (somaDeDivisoresA == b && somaDeDivisoresB == a)
    {
       return 1;
    }
@@ -35,16 +36,35 @@ int testa_amigos(int a, int b){
    {
       return 0;
    }
-   
 }
 
 int main(){
    int interval1[] = {0, 0};
    int interval2[] = {0, 0};
 
+   int qtdAmigos = 0;
+
    scanf("%d %d %d %d", &interval1[0], &interval1[1], &interval2[0], &interval2[1]);
 
-   if (interval1[0] != interval2[0] || interval1[1] != interval2[1])
+   for (int i = interval1[0]; i <= interval1[1]; i++)
+   {
+      for (int j = interval2[0]; j <= interval2[1]; j++)
+      {
+         if (j == i)
+         {
+            continue;
+         }
+         
+         int isFriends = testa_amigos(i, j);
+         if (isFriends == 1)
+         {
+            printf("O %d possui um amigo!\n", i);
+            qtdAmigos++;
+         }
+      }
+   }
+
+   if (qtdAmigos == 0)
    {
       printf("Os intervalos nao apresentam amigos!");
    }

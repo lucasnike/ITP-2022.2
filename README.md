@@ -13,4 +13,8 @@ similar. Fiz todos os exercios da semana do LoP. E pretendo fazer os do Beecrowd
 
 ## Week 3
 
-Aprendi todos os laços, como: do ... while, for, while,
+Aprendi todos os laços, como: do ... while, for, while, fiz todas as atividades da prova e metade das atividades da lista.
+
+## Week 4
+
+Aprendi a fazera assinatura de funções, criar funções, e descobrir que para usar valores booleanos em c é necessário usar o retorno int com 0 ou 1. E fiz todas as atividades da prova também.
