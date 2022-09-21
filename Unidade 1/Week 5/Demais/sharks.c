@@ -1,37 +1,14 @@
 #include <stdio.h>
 #include <locale.h>
 
-int contem(int escolha, int *jaInformados){
-
-   int qtdElementosContidos = 0;
-
-   for (int i = 0; i < 14; i++)
-   {
-      if (jaInformados[i] == escolha)
-      {
-         qtdElementosContidos++;
-      }
-   }
-
-   if (qtdElementosContidos > 0)
-   {
-      return 1;
-   }
-   else
-   {
-      return 0;
-   }
-   
-   return 0;
-}
 
 int main(){
    setlocale(LC_ALL, "Portuguese");
 
-   char tubaroes[14][50] = {"Tubar√£o Branco", "Tubar√£o Martelo", "Tubar√£o Touro", 
-   "Tubar√£o Baleia", "Tubar√£o Lixa", "Tubar√£o Frade", "Tubar√£o Tigre", "Tubar√£o Cabe√ßa-Chata", 
-   "Tubar√£o Serra", "Tubar√£o de Pontas Negras", "Tubar√£o Raposa", "Tubar√£o Mako", 
-   "Tubar√£o Bruxa", "Tubar√£o Azul"};
+   char tubaroes[14][50] = {"Tubar„o Branco", "Tubar„o Martelo", "Tubar„o Touro", 
+   "Tubar„o Baleia", "Tubar„o Lixa", "Tubar„o Frade", "Tubar„o Tigre", "Tubar„o CabeÁa-Chata", 
+   "Tubar„o Serra", "Tubar„o de Pontas Negras", "Tubar„o Raposa", "Tubar„o Mako", 
+   "Tubar„o Bruxa", "Tubar„o Azul"};
 
    int qtdTubaroesFotografados = 0;
    int tubaroesFotografados[14] = {0};
@@ -50,27 +27,21 @@ int main(){
          return 0;
       }
 
-      for (int j = 0; i < 14; j++)
+      if (tubaroesFotografados[tubaraoEscolhido - 1] == 0)
       {
-         if (tubaroesFotografados[j] == 0 )
-         {
-            if (contem(tubaraoEscolhido, tubaroesFotografados) == 0)
-            {
-               tubaroesFotografados[j] = tubaraoEscolhido;
-               especiesDiferentes++;
-            }
-         }
+         tubaroesFotografados[tubaraoEscolhido - 1] = 1;
+         especiesDiferentes++;
       }
    }
 
    
-   printf("%d esp√©cies diferentes.", especiesDiferentes);
+   printf("%d espÈcies diferentes.\n", especiesDiferentes);
 
-   for (int i = 0; i < qtdTubaroesFotografados; i++)
+   for (int i = 0; i < 14; i++)
    {
-      if (tubaroesFotografados[i] != 0)
+      if (tubaroesFotografados[i] == 1)
       {
-         printf("%s", tubaroes[i]);
+         printf("%s\n", tubaroes[i]);
       }
    }
    
