@@ -1,49 +1,90 @@
 #include <stdio.h>
 
 int main(){
-
-   int aprovados[50][2] = {0};
-   int reprovados[50][2] = {0};
-   int recuperacao[50][2] = {0};
-
-   int qtdAlunos = 0;
+   float numeroNaChamada;
    float auxNota = 0;
-   float numeroNaChamada = 0;
+   int cont = 0;
+
    int qtdAprovados = 0, qtdReprovados = 0, qtdRecuperacao = 0;
 
+   int qtdAlunos = 0;
    scanf("%d", &qtdAlunos);
 
-   for (int i = 0; i < qtdAlunos; i++)
+   float notas[qtdAlunos + 1];
+   notas[0] = 0;
+
+   for (int i = 1; i <= qtdAlunos; i++)
    {
       char auxChar;
       scanf("%f %c %f", &numeroNaChamada, &auxChar ,&auxNota);
 
       if (auxNota >= 7)
       {
-         aprovados[i][i + 1] = auxNota;
-         aprovados[i][i] = numeroNaChamada;
-      }
-      else if (auxNota >= 5 && auxNota < 7){
-         recuperacao[i][i] = numeroNaChamada;
-         recuperacao[i][i + 1] = auxNota;
-      }
-      else {
-         reprovados[i][i + 1] = auxNota;
-         reprovados[i][i] = numeroNaChamada;
-      }
-   }
-
-   
-   for (int i = 0; i < 50; i++)
-   {
-      if (aprovados[i][i + 1] != NULL && aprovados[i][i + 1] != 0)
-      {
          qtdAprovados++;
       }
+      else if(auxNota >= 5 && auxNota < 7)
+      {
+         qtdRecuperacao++;
+      }
+      else{
+         qtdReprovados++;
+      }
+
+      notas[i] = auxNota;
    }
 
-   printf("Aprovados = %d", qtdAprovados);
-   
+   // Laço aprovados
+   printf("Aprovados: ");
+   for (int i = 1; i <= qtdAlunos; i++)
+   {
+     if (notas[i] >= 7)
+     {
+         cont++;
+         if (cont == qtdAprovados)
+         {
+            printf("%d (%.1f)\n", i, notas[i]);
+            break;
+         }
+         
+         printf("%d (%.1f), ", i, notas[i]);
+     }
+   }
+   cont = 0;
+
+   // Laço recuperação
+   printf("Recuperação: ");
+   for (int i = 1; i <= qtdAlunos; i++)
+   {
+     if (notas[i] < 7 && notas[i] >= 5)
+     {
+         cont++;
+         if (cont == qtdRecuperacao)
+         {
+            printf("%d (%.1f)\n", i, notas[i]);
+            break;
+         }
+         
+         printf("%d (%.1f), ", i, notas[i]);
+     }
+   }
+   cont = 0;
+
+   // Laço reporvados
+   printf("Reprovados: ");
+   for (int i = 1; i <= qtdAlunos; i++)
+   {
+     if (notas[i] < 5)
+     {
+         cont++;
+         if (cont == qtdReprovados)
+         {
+            printf("%d (%.1f)\n", i, notas[i]);
+            break;
+         }
+         
+         printf("%d (%.1f), ", i, notas[i]);
+     }
+   }   
 
    return 0;
 }
