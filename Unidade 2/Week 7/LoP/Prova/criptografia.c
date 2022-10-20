@@ -6,21 +6,29 @@ int* shape(char *chave, int string_size);
 void read_line( char linha[], int tam );
 
 int main(){   
-   const char S[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+   char S[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
    'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '.', ',', '?', ' ' };
 
-   char k[4] = {0};
+   char k[10] = {0};
    char msg[200] = {0};
 
-   scanf("%s", &k);
+   read_line(k, 10);
    read_line(msg, 200);
 
    int msg_size = (int)strlen(msg);
+   int key_size = (int)strlen(k);
 
    // Verifica a chave
-   for (int i = 0; i < sizeof(k); i++)
+   for (int i = 0; i < key_size; i++)
    {
+      if (key_size < 0 || key_size > 4)
+      {
+         printf("Chave invalida!");
+         return 0;
+      }
+      
+
       if (k[i] < '0' || k[i] > '9')
       {
          printf("Chave invalida!");
@@ -30,7 +38,7 @@ int main(){
    }
    
    // Verficida se a mensagem é válida
-   for (int i = 0; i < 200; i++)
+   for (int i = 0; i < msg_size; i++)
    {
       int iguais = 0;
       for (int j = 0; j < 40; j++)
@@ -59,11 +67,10 @@ int main(){
 
             if (position > 39)
             {
-               position - 39;
+               position -= 40;
             }
 
             msg[i] = S[position];
-            printf("%c\n", msg[i]);
             break;
          }
      }
@@ -73,7 +80,7 @@ int main(){
    {
       printf("%c", msg[i]);
    }
-   
+
    return 0;
 }
 
