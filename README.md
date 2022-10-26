@@ -18,3 +18,5 @@ Aprendi todos os laços, como: do ... while, for, while, fiz todas as atividades
 ## Week 4
 
 Aprendi a fazera assinatura de funções, criar funções, e descobrir que para usar valores booleanos em c é necessário usar o retorno int com 0 ou 1. E fiz todas as atividades da prova também.
+
+## Week 10 - Alocação dinâmica
