@@ -2,34 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(){
-   char str[200];
-   char* pedaco;
-   int* numeros = calloc(1, sizeof(int));
-   int cont = 0;
-   
-   fgets(str, 199, stdin);
+void read_line(char entrada[], int max, FILE* f){
+  do fgets(entrada, max, f);
+  while (entrada[0] == '\n');
+  int tam=strlen(entrada);
+  if (entrada[tam-1] == '\n') entrada[tam-1]='\0';
+}
 
-   pedaco = strtok(str, " ");
+int main() {
+  char str[200];
+  char *pedaco;
+  int *numeros = calloc(1, sizeof(int));
+  int cont = 0;
 
-   while (pedaco != NULL)
-   {
-      numeros[cont] = atoi(pedaco);
-      printf("Atoi %d\n", cont);
-      cont++;
-      printf("Atoi %d\n", cont);
-      realloc(numeros, (cont + 1) * sizeof(int));
-      printf("Atoi %d\n\n", cont);
+  read_line(str, 199, stdin);
 
+  pedaco = strtok(str, " ");
 
-      pedaco = strtok(NULL, " ");
-   }
+  while (pedaco != NULL) {
+    numeros[cont] = atoi(pedaco);
+    cont++;
+    numeros = realloc(numeros, (cont + 1) * sizeof(int));
 
-   for (int i = 0; i < cont; i++)
-   {
-      printf("%d\n", numeros[i]);
-   }
+    pedaco = strtok(NULL, " ");
+  }
 
-   printf("Posicao 0 = %d", numeros[0]);
-   
+  for (int i = 1; i < cont; i++) {
+    for (int j = 0; j < cont - 1; j++) {
+      if (numeros[j] > numeros[j + 1]) {
+        int aux = numeros[j];
+        numeros[j] = numeros[j + 1];
+        numeros[j + 1] = aux;
+      }
+    }
+  }
+
+  for (int i = 0; i < cont; i++) {
+    printf("%d ",numeros[i]);
+  }
 }
