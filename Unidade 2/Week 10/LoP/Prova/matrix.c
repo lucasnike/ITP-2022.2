@@ -9,6 +9,7 @@ typedef struct {
 Matrix *createMatrix(int nlin, int ncol);
 void readMatrix(Matrix *m);
 void printMatrix(Matrix *m);
+
 void destroyMatrix(Matrix **m);
 
 int main() {
@@ -61,5 +62,9 @@ void printMatrix(Matrix *m) {
 }
 
 void destroyMatrix(Matrix **m){
-  free(*m);
+  for (int i = 0; i < m[0]->nlin; i++)
+  {
+    free(m[0]->mat[i]);
+  }
+  m[0] = NULL;
 }
