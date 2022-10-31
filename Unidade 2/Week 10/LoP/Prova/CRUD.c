@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <locale.h>
+
+#define MAX 1000
 
 typedef struct{
     char nome[50];
@@ -9,33 +12,33 @@ typedef struct{
 } Pessoa;
 
 Pessoa criar(char nome[], int idade, int sexo);
-void inserir(Pessoa *pessoas, Pessoa p);
-void imprimir(Pessoa *pessoas);
+void inserir(Pessoa *pessoas, Pessoa p, int cont);
+void imprimir(Pessoa *pessoas, int cont);
 void deletar(Pessoa *pessoas, Pessoa p);
-int is_strings_equal(char str1[], char str2[], int size);
 
 int main(){
-    Pessoa *pessoas = calloc(1, sizeof(Pessoa));
+    setlocale(LC_ALL, "Portuguese");
+    Pessoa *pessoas = calloc(MAX, sizeof(Pessoa));
     char escolha;
 
     int idade, cont = 0;
     char sexo;
     char nome[50];
 
-    while (1 == 1)
+    while (1)
     {
         scanf("%c", &escolha);
 
         switch (escolha)
         {
         case 'i':
-            
-            cont++;
             scanf(" %49[^\n]", nome);
             scanf("%d", &idade);
             scanf(" %c", &sexo);
 
-            inserir(pessoas, criar(nome, idade, sexo));
+            inserir(pessoas, criar(nome, idade, sexo), cont + 1);
+            cont++;
+            pessoas = realloc(pessoas, cont + 1);
             break;
         case 'd':
             scanf(" %49[^\n]", nome);
@@ -46,7 +49,7 @@ int main(){
             break;
 
         case 'p':
-            imprimir(pessoas);
+            imprimir(pessoas, cont);
             return 0;
             break;
         }
@@ -63,8 +66,8 @@ Pessoa criar(char nome[], int idade, int sexo){
     return pessoa;
 }
 
-void imprimir(Pessoa *pessoas){
-    for (int i = 0; i < 100; i++)
+void imprimir(Pessoa *pessoas, int cont){
+    for (int i = 0; i < cont; i++)
     {
         if (pessoas[i].nome != "" && pessoas[i].sexo != "" && pessoas[i].idade != 0)
         {
@@ -73,8 +76,8 @@ void imprimir(Pessoa *pessoas){
     }
 }
 
-void inserir(Pessoa *pessoas, Pessoa p){
-    for (int i = 0; i < 100; i++)
+void inserir(Pessoa *pessoas, Pessoa p, int cont){
+    for (int i = 0; i < cont; i++)
     {
         if (pessoas[i].idade == 0 && pessoas[i].sexo == 0 && pessoas[i].nome[0] == 0)
         {
@@ -85,11 +88,11 @@ void inserir(Pessoa *pessoas, Pessoa p){
 }
 
 void deletar(Pessoa *pessoas, Pessoa p){
-    for (int i = 0; i < 99; i++)
+    for (int i = 0; i < MAX - 1; i++)
     {
-        if (pessoas[i].idade == p.idade && pessoas[i].sexo == p.sexo && is_strings_equal(p.nome, pessoas[i].nome, 50) == 1)
+        if (pessoas[i].idade == p.idade && pessoas[i].sexo == p.sexo && strcmp(p.nome, pessoas[i].nome) == 0)
         {
-            for (int j = i; j < 99; j++)
+            for (int j = i; j < MAX - 1; j++)
             {
                 pessoas[j] = pessoas[j + 1];
             }
@@ -97,22 +100,4 @@ void deletar(Pessoa *pessoas, Pessoa p){
             break;
         }
     }
-}
-
-int is_strings_equal(char str1[], char str2[], int size){
-    int diferentes = 0;
-    for (int j = 0; j < size; j++)
-    {
-        if (str1[j] != str2[j])
-        {
-            diferentes++;
-        }
-    }
-
-    if (diferentes == 0)
-    {
-        return 1;
-    }
-
-    return 0;
 }
