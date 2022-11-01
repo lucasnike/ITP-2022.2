@@ -19,7 +19,7 @@ int main() {
   Pessoa *pessoas = calloc(1, sizeof(Pessoa));
   char escolha;
 
-  int idade, cont = 0;
+  int idade, cont = 1;
   char sexo;
   char nome[50];
 
@@ -28,13 +28,14 @@ int main() {
 
     switch (escolha) {
     case 'i':
+      pessoas = realloc(pessoas, sizeof(Pessoa) * cont);
+
       scanf(" %49[^\n]", nome);
       scanf("%d", &idade);
       scanf(" %c", &sexo);
 
-      inserir(pessoas, criar(nome, idade, sexo), cont + 1);
+      inserir(pessoas, criar(nome, idade, sexo), cont);
       cont++;
-      pessoas = realloc(pessoas, cont + 1);
       break;
     case 'd':
       scanf(" %49[^\n]", nome);
@@ -81,15 +82,11 @@ void inserir(Pessoa *pessoas, Pessoa p, int cont) {
 }
 
 void deletar(Pessoa *pessoas, Pessoa p, int cont) {
+  for (int i = 0; i < cont; i++) {
+    
+    if (pessoas[i].idade == p.idade && pessoas[i].sexo == p.sexo && strcmp(p.nome, pessoas[i].nome) == 0) {
 
-  if (cont == 0) {
-    return;
-  }
-
-  for (int i = 0; i < cont - 1; i++) {
-    if (pessoas[i].idade == p.idade && pessoas[i].sexo == p.sexo &&
-        strcmp(p.nome, pessoas[i].nome) == 0) {
-      for (int j = i; j < MAX - 1; j++) {
+      for (int j = i; j < cont; j++) {
         pessoas[j] = pessoas[j + 1];
       }
 
