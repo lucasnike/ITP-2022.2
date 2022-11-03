@@ -1,47 +1,121 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct
 {
-    char nome[100];
-    int marcados;
-    int sofridos;
-} Time;
+    char nome[50];
+    int idade;
+    char sexo;
+} Pessoa;
 
-void times(int n, Time vet[])
+Pessoa criar(char nome[], int idade, int sexo);
+void inserir(Pessoa *pessoas, Pessoa p);
+void imprimir(Pessoa *pessoas);
+void deletar(Pessoa *pessoas, Pessoa p);
+int is_strings_equal(char str1[], char str2[], int size);
+
+int main()
 {
-    for (int i = 0; i < n; i++)
+    Pessoa *pessoas = calloc(100, sizeof(Pessoa));
+    char escolha;
+    int idade;
+    char sexo;
+    char nome[50];
+
+    while (1 == 1)
     {
-        if (vet[i + 1].marcados > vet[i].marcados)
+        scanf("%c", &escolha);
+
+        switch (escolha)
         {
-            int temp = vet[i + 1].marcados;
-            vet[i + 1].marcados = vet[i].marcados;
-            vet[i].marcados = temp;
+        case 'i':
+            scanf(" %49[^\n]", nome);
+            scanf("%d", &idade);
+            scanf(" %c", &sexo);
+
+            inserir(pessoas, criar(nome, idade, sexo));
+            
+            break;
+        case 'd':
+            scanf(" %49[^\n]", nome);
+            scanf("%d", &idade);
+            scanf(" %c", &sexo);
+
+            deletar(pessoas, criar(nome, idade, sexo));
+            break;
+
+        case 'p':
+            imprimir(pessoas);
+            return 0;
+            break;
+        }
+    }
+
+    return 0;
+}
+
+Pessoa criar(char nome[], int idade, int sexo)
+{
+    Pessoa pessoa = {.idade = idade, .sexo = sexo};
+    strcpy(pessoa.nome, nome);
+
+    return pessoa;
+}
+
+void imprimir(Pessoa *pessoas)
+{
+    for (int i = 0; i < 100; i++)
+    {
+        if (pessoas[i].nome[0] != 0 && pessoas[i].sexo != 0 && pessoas[i].idade != 0)
+        {
+            printf("%s,%d,%c\n", pessoas[i].nome, pessoas[i].idade, pessoas[i].sexo);
         }
     }
 }
 
-int main()
+void inserir(Pessoa *pessoas, Pessoa p)
 {
-    int n;
-    scanf("%d", &n);
-
-    Time jogo[n];
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < 100; i++)
     {
-        scanf(" %99[^\n]s", jogo[i].nome);
-        scanf("%d", &jogo[i].marcados);
-        scanf("%d", &jogo[i].sofridos);
+        if (pessoas[i].idade == 0 && pessoas[i].sexo == 0 && pessoas[i].nome[0] == 0)
+        {
+            pessoas[i] = p;
+            break;
+        }
+    }
+}
+
+void deletar(Pessoa *pessoas, Pessoa p)
+{
+    for (int i = 0; i < 99; i++)
+    {
+        if (pessoas[i].idade == p.idade && pessoas[i].sexo == p.sexo && is_strings_equal(p.nome, pessoas[i].nome, 50) == 1)
+        {
+            for (int j = i; j < 99; j++)
+            {
+                pessoas[j] = pessoas[j + 1];
+            }
+
+            break;
+        }
+    }
+}
+
+int is_strings_equal(char str1[], char str2[], int size)
+{
+    int diferentes = 0;
+    for (int j = 0; j < size; j++)
+    {
+        if (str1[j] != str2[j])
+        {
+            diferentes++;
+        }
     }
 
-    times(n, jogo);
-
-    for (int j = 1; j < n + 1; j++)
+    if (diferentes == 0)
     {
-        printf("%d - %s\n", j, jogo[j - 1].nome);
-        printf("Gols marcados: %d\n", jogo[j - 1].marcados);
-        printf("Gols sofridos: %d\n", jogo[j - 1].sofridos);
+        return 1;
     }
 
     return 0;
